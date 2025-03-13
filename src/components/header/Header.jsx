@@ -1,16 +1,25 @@
-import logo from "../../assets/logo.svg ";
+import { Button } from "@mui/material";
+import styles from "./Header.module.css";
 
 export default function Header() {
-  console.log("Logo path:", logo);
   return (
-    <div>
-      <div>
-        logo
-        <img src={logo} alt="" />
+    <div className={styles.container}>
+      <div className={styles.logoImg}>
+        <img src="/images/logo.svg" alt="logo" />
       </div>
-      <div>
-        <div>axali TanamSromeli </div>
-        <div>axali davaleba </div>
+      <div className={styles.buttonsContainer}>
+        <div className={styles.newMember}>
+          <button>
+            <p> თანამშრომლის შექმნა</p>
+          </button>
+        </div>
+        <div className={styles.newTask}>
+          <button>
+            <p>
+              <span>+</span> შექმენი ახალი დავალება{" "}
+            </p>
+          </button>
+        </div>
       </div>
     </div>
   );

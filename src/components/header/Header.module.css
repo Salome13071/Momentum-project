@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  margin: 31px 0px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+}
+.logoImg {
+  cursor: pointer;
+}
+.buttonsContainer {
+  display: flex;
+  gap: 40px;
+}
+.newMember button {
+  background: none;
+  border-color: #8338ec;
+  border-radius: 5px;
+}
+.newMember button p {
+  margin: 10px 20px;
+  background: none;
+  font-size: 16px;
+}
+
+.newTask button {
+  background: #8338ec;
+  border-color: #8338ec;
+  border-radius: 5px;
+}
+.newTask button p {
+  margin: 10.5px 20px;
+  color: white;
+  font-size: 16px;
+  font-family: Roboto;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.newTask button span {
+  font-size: 18px;
+}

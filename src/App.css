@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 #root {
   max-width: 1920px;
-  margin: 0 auto;
+  margin: 0 120px;
+  font-family: "Roboto", sans-serif;
+}
+button {
+  cursor: pointer;
 }
