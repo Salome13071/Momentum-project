@@ -1,10 +1,37 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@font-face {
+  font-family: "FiraGO";
+  src: url("./assets/fonts/firago_5.2.5/webfonts/firago-latin-400-normal.woff2")
+      format("woff2"),
+    url("./assets/fonts/firago_5.2.5/webfonts/firago-latin-400-normal.woff")
+      format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FiraGO";
+  src: url("./assets/fonts/firago_5.2.5/webfonts/firago-latin-700-normal.woff2")
+      format("woff2"),
+    url("./assets/fonts/firago_5.2.5/webfonts/firago-latin-700-normal.woff")
+      format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
 
 #root {
   max-width: 1920px;
   margin: 0 120px;
-  font-family: "Roboto", sans-serif;
+  font-family: "FiraGo", sans-serif;
 }
 button {
   cursor: pointer;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
 }

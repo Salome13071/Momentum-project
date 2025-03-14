@@ -1,0 +1,60 @@
+.tasksMainContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 55px;
+}
+.tasksStatusContainer {
+  margin-top: 80px;
+}
+
+.taskItemName {
+  background: #f7bc30;
+  width: 381px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.taskItemName2 {
+  background: #fb5607;
+  width: 381px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.taskItemName2color {
+  border: 1px solid #fb5607;
+}
+.taskItemName3 {
+  background: #ff006e;
+  width: 381px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.taskItemName4 {
+  background: #3a86ff;
+  width: 381px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}

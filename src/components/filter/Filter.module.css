@@ -1,0 +1,12 @@
+.filterBoxes {
+  display: flex;
+  width: 688px;
+  height: 44px;
+  gap: 45px;
+  padding: 0 18px;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  cursor: pointer;
+}

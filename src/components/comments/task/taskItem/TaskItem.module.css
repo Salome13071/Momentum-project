@@ -1,0 +1,66 @@
+.taskItemBox {
+  width: 380px;
+  height: 217px;
+  border: 1px solid #f7bc30;
+  border-radius: 15px;
+  margin-top: 30px;
+  padding: 24px 24px 0;
+}
+.TaskItemInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.taskTwoInfo {
+  display: flex;
+  gap: 10px;
+}
+.taskMedium {
+  width: 86px;
+  height: 26px;
+  border: 1px solid #f7bc30;
+  background: none;
+  color: #f7bc30;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.taskdepartment {
+  width: 86px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #ff66a8;
+  border-radius: 15px;
+  font-size: 12px;
+}
+.taskDate {
+  font-size: 12px;
+}
+.aboutTask {
+  padding: 0 10px;
+  margin-top: 29px;
+}
+.aboutTask h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.aboutTask p {
+  font-size: 14px;
+}
+.taskComentInfo {
+  display: flex;
+  justify-content: space-between;
+  height: 31px;
+  margin-top: 28px;
+}
+.taskComments {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,36 @@
+.dropdown {
+  display: flex;
+  gap: 8px;
+}
+.checkboxWindow {
+  height: 274px;
+  top: 281px;
+  left: 120px;
+  width: 688px;
+  position: absolute;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  background: white;
+  z-index: 1;
+  padding: 40px 30px;
+}
+.checkboxWindowLable {
+  padding-bottom: 25px;
+  display: flex;
+  gap: 10px;
+}
+.checkboxWindowLable label {
+  display: flex;
+  gap: 10px;
+}
+
+.selectedButton {
+  width: 155px;
+  background: #8338ec;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  position: absolute;
+  right: 40px;
+  padding: 8px 0px;
+}

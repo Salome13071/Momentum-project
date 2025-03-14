@@ -1,78 +1,25 @@
-import { useState, useEffect, useContext } from "react";
-import styles from "./Prioritet.module.css";
-import FilterContext from "../../providers/FilterDataProvider";
+import FilterItem from "./filterItem/FilterItem";
+import styles from "./Filter.module.css";
 
 const checkboxesDep = [
-  { id: 1, label: "მარკეტინგის დეპარტამენტი" },
+  { id: 1, label: "მარკეტინგის დეპარტამენტი " },
   { id: 2, label: "დიზაინის დეპარტამენტი" },
   { id: 3, label: "ლოჯისტიკის დეპარტამენტი" },
   { id: 4, label: "IT დეპარტამენტი" },
 ];
+const checkboxesDep1 = [
+  { id: 1, label: "asd " },
+  { id: 2, label: "asd დეპარტამენტი" },
+  { id: 3, label: "asdasd დეპარტამენტი" },
+  { id: 4, label: "IT asdasd" },
+];
 
-export default function Filter({ title, data }) {
-  const [checkedItems, setCheckedItems] = useState([]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { filterData, setFilterData, setFilterOutputData } =
-    useContext(FilterContext);
-  const handleCheckboxChange = (id) => {
-    setCheckedItems((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
-
-  useEffect(() => {
-    setFilterData((prevState) => {
-      return {
-        ...prevState,
-        key: title,
-        value: isDropdownOpen,
-      };
-    });
-  }, [isDropdownOpen]);
-
-  useEffect(() => {
-    if (filterData.key !== title && filterData.value) {
-      if (isDropdownOpen) setIsDropdownOpen(false);
-    }
-  }, [filterData]);
-
-  const handleSet = () => {
-    setIsDropdownOpen(false);
-    setFilterOutputData((prevState) => {
-      return {
-        ...prevState,
-        [title]: checkedItems,
-      };
-    });
-  };
-
+export default function Filter() {
   return (
-    <div>
-      <div
-        className={styles.dropdown}
-        onClick={() => setIsDropdownOpen((prev) => !prev)}
-      >
-        {title}
-      </div>
-
-      {isDropdownOpen && (
-        <div className="checkbox-window">
-          {data.map((checkbox) => (
-            <div key={checkbox.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  value={checkbox.id}
-                  checked={checkedItems.includes(checkbox.id)}
-                  onChange={() => handleCheckboxChange(checkbox.id)}
-                />
-                {checkbox.label}
-              </label>
-            </div>
-          ))}
-          <button onClick={handleSet}>არჩევა </button>
-        </div>
-      )}
+    <div className={styles.filterBoxes}>
+      <FilterItem title="დეპარტამენტი" data={checkboxesDep} />
+      <FilterItem title="პრიორიტეტი" data={checkboxesDep1} />
+      <FilterItem title="თანამშრომელი" data={checkboxesDep} />
     </div>
   );
 }
