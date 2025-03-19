@@ -5,8 +5,13 @@
   background: #fbf9ff;
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 310px;
 }
-
+.addNewTaskHeader {
+  margin-bottom: 25px;
+  font-size: 34px;
+  font-weight: 700;
+}
 .taskLabels {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -16,4 +21,94 @@
 .taskLabels label {
   display: flex;
   flex-direction: column;
+}
+.headerLableH3,
+.selectBox {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.taskLabels input {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  height: 45px;
+  max-width: 550px;
+}
+.newTaskDep select {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  height: 45px;
+  max-width: 550px;
+}
+.newEmploy select {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  height: 45px;
+  max-width: 550px;
+}
+.newTaskDep {
+  background: none;
+  display: flex;
+  /* gap: 10px; */
+}
+.selectBox {
+  background: white;
+  color: black;
+}
+
+.taskTextarea {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  max-width: 550px;
+  min-height: 133px;
+}
+.newTaskParagraph {
+  font-size: 10px;
+  color: #6c757d;
+}
+.newTaskboxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 145px;
+}
+.newTaskbox2 {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  max-width: 260px;
+}
+.newTaskboxPrioritet select {
+  width: 259px;
+  height: 46px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.newTaskboxStatus select {
+  width: 259px;
+  height: 46px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.newTaskDate {
+  max-width: 318px;
+}
+.newTaskDate input {
+  width: 259px;
+  height: 46px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.AddNewTaskSubmiT {
+  display: flex;
+  justify-content: end;
+  max-width: 1261px;
+  height: 42px;
+}
+.AddNewTaskSubmiT button {
+  width: 208px;
+  background: #8338ec;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }

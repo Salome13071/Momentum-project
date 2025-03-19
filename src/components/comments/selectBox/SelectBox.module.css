@@ -1,0 +1,54 @@
+.selectContainer {
+  position: relative;
+  width: 200px;
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+.optionsList {
+  width: 259px;
+  height: 46px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.customSelect {
+  width: 259px;
+  height: 46px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  background-color: white;
+}
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  top: 44px;
+  background: white;
+  cursor: pointer;
+  position: absolute;
+}
+.option {
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
+.option:hover {
+  background-color: #ccc;
+}
+.customSelect {
+  display: flex;
+  align-items: center;
+  position: relative;
+}

@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import styles from "./FilterItem.module.css";
-import FilterContext from "../../../providers/FilterDataProvider";
+import DataContext from "../../../providers/DataProvider";
 
 export default function FilterItem({ title, data }) {
   const [checkedItems, setCheckedItems] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { filterData, setFilterData, setFilterOutputData } =
-    useContext(FilterContext);
+    useContext(DataContext);
   const handleCheckboxChange = (id) => {
     setCheckedItems((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -55,12 +55,13 @@ export default function FilterItem({ title, data }) {
             <div key={checkbox.id} className={styles.checkboxWindowLable}>
               <label>
                 <input
+                  key={checkbox.id + checkbox.name}
                   type="checkbox"
                   value={checkbox.id}
                   checked={checkedItems.includes(checkbox.id)}
                   onChange={() => handleCheckboxChange(checkbox.id)}
                 />
-                {checkbox.label}
+                {checkbox.name}
               </label>
             </div>
           ))}

@@ -13,6 +13,8 @@
   background: white;
   z-index: 1;
   padding: 40px 30px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .checkboxWindowLable {
   padding-bottom: 25px;
