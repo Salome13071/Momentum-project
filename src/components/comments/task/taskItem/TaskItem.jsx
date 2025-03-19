@@ -1,9 +1,17 @@
 import styles from "./TaskItem.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function TaskItem() {
+  const navigate = useNavigate();
   return (
     <div>
-      <div className={styles.taskItemBox}>
+      <div
+        className={styles.taskItemBox}
+        onClick={() => {
+          console.log("assad");
+          navigate("/taskDetails");
+        }}
+      >
         <div className={styles.TaskItemInfo}>
           <div className={styles.taskTwoInfo}>
             <div className={styles.taskMedium}>

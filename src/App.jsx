@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import Dashboard from "./pages/dashboard/Dashboard";
 import AddNewTask from "./pages/addNewTask/AddNewTask";
 import { DataProvider } from "./providers/DataProvider";
+import TaskDetails from "./pages/task/TaskDetails";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/new-task" element={<AddNewTask />} />
+            <Route path="/taskDetails" element={<TaskDetails />} />
           </Routes>
         </DataProvider>
       </main>

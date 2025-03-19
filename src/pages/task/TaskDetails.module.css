@@ -1,0 +1,155 @@
+.taskMainContainer {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+
+.taskDescriptionContainer {
+  max-width: 715px;
+}
+
+.taskDescription_details {
+  display: flex;
+  gap: 18px;
+}
+.taskMedium {
+  width: 86px;
+  height: 26px;
+  border: 1px solid #f7bc30;
+  background: none;
+  color: #f7bc30;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+.taskdepartment {
+  width: 86px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #ff66a8;
+  border-radius: 15px;
+  font-size: 12px;
+}
+.aboutTask {
+  margin-top: 29px;
+  display: flex;
+  gap: 26px;
+  flex-direction: column;
+}
+.aboutTask h1 {
+  font-size: 34px;
+  font-weight: 700;
+}
+.aboutTask p {
+  font-size: 18px;
+  line-height: 150%;
+}
+.taskDetails {
+  width: 493px;
+  height: 277px;
+  margin-top: 63px;
+}
+.taskDetails_items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 18px;
+}
+.taskDetails_items_title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.status {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.statusSelect {
+  width: 259px;
+  height: 45px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+.emplInfo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.emplInfo_titles p {
+  font-weight: lighter;
+  font-size: 11px;
+}
+.emplInfo_titles h4 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+/*  coments styles  */
+
+.comentsContainer {
+  max-width: 741px;
+  height: 400px;
+  background: #f8f3fe;
+  opacity: 65%;
+  border-radius: 10px;
+  margin-top: 64px;
+}
+.comentInput {
+  max-width: 651px;
+  min-height: 135px;
+  margin: 40px 45px;
+  position: relative;
+  border: 1 #adb5bd;
+  border-radius: 10px;
+  background: white;
+}
+.comentInput input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  padding-left: 20px;
+  border-radius: 10px;
+}
+.comentInput button {
+  position: absolute;
+  top: 90px;
+  right: 30px;
+  border: none;
+  border-radius: 20px;
+  width: 155px;
+  height: 35px;
+  background: #8338ec;
+  color: white;
+}
+.comentsBox {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 45px;
+  gap: 40px;
+}
+.comments {
+  display: flex;
+  gap: 7px;
+}
+.comments label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 30px;
+  height: 22px;
+  background: #8338ec;
+  border-radius: 30px;
+}
+.coments_name {
+  display: flex;
+  gap: 12px;
+}
