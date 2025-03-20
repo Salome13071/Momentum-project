@@ -39,7 +39,11 @@ export default function TaskDetails() {
                 <p> სტატუსი</p>
               </div>
               <div className={styles.statusSelect}>
-                <SelectBox data={statusData} className={styles.statusSelect} />
+                <SelectBox
+                  defVal={null}
+                  data={statusData}
+                  className={styles.statusSelect}
+                />
               </div>
             </div>
             <div className={styles.status}>

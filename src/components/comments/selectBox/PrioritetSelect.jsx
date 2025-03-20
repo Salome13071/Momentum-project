@@ -1,40 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SelectBox.module.css";
 
-export default function PrioritetSelect({ data }) {
+export default function PrioritetSelect({ data, onChange }) {
   const [selectedValue, setSelectedValue] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleSelect = (dep) => {
-    setSelectedValue(dep);
+  useEffect(() => {
+    const defaultItem = data.find((item) => item.id === 2);
+    setSelectedValue(defaultItem);
+    if (defaultItem) {
+      onChange(defaultItem.id);
+    }
+  }, [data]);
+
+  const handleSelect = (item) => {
+    setSelectedValue(item);
     setIsOpen(false);
+    onChange(item.id);
   };
 
   return (
     <div className={styles.customSelect} onClick={toggleDropdown}>
       <div className={styles.selectedOption}>
-        {selectedValue?.icon && (
+        {selectedValue ? (
           <img
             src={selectedValue.icon}
             alt={selectedValue.name}
             className={styles.icon}
           />
-        )}
-        {selectedValue?.name || "აირჩიეთ პრიორიტეტი"}
+        ) : null}
+        {selectedValue ? selectedValue?.name : null}
+        {/* <span className={styles.arrowSVG}>
+          <img src="./images/arrow-down.svg" alt="" />
+        </span> */}
       </div>
       {isOpen && (
         <div className={styles.optionsList}>
-          {data.map((dep) => (
+          {data.map((item) => (
             <div
-              key={dep.id + dep.name}
+              key={item.id + item.name}
               className={styles.option}
-              onClick={() => handleSelect(dep)}
+              onClick={() => handleSelect(item)}
             >
-              {dep.icon && (
-                <img src={dep.icon} alt={dep.name} className={styles.icon} />
+              {item.icon && (
+                <img src={item.icon} alt={item.name} className={styles.icon} />
               )}
-              {dep.name}
+              {item.name}
             </div>
           ))}
         </div>
