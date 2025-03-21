@@ -18,7 +18,8 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
+            <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/new-task" element={<AddNewTask />} />
             <Route path="/task/details/:id" element={<TaskDetails />} />
