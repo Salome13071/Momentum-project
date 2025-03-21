@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 55px;
+  margin-bottom: 120px;
 }
 .tasksStatusContainer {
   margin-top: 80px;
