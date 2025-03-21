@@ -17,6 +17,9 @@
   border-color: #8338ec;
   border-radius: 5px;
 }
+.newMember button:hover {
+  border-color: #b588f4;
+}
 .newMember button p {
   margin: 10px 20px;
   background: none;
@@ -28,6 +31,10 @@
   background: #8338ec;
   border-color: #8338ec;
   border-radius: 5px;
+}
+.newTask button:hover {
+  background-color: #b588f4;
+  border-color: #b588f4;
 }
 .newTask button p {
   margin: 10.5px 20px;

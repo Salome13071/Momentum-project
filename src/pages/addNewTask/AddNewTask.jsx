@@ -238,9 +238,8 @@ export default function AddNewTask() {
               მინიმუმ 2 სიმბოლო
             </p>
             <p className={styles.newTaskParagraph}>
-              {" "}
-              მაქსიმუმ{" "}
-              {255 - (formErrors.name.length ? formErrors.name.length : 0)}{" "}
+              მაქსიმუმ
+              {255 - (formErrors.name.length ? formErrors.name.length : 0)}
               სიმბოლო
             </p>
           </label>

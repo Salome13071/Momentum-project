@@ -14,17 +14,17 @@ import TaskDetails from "./pages/task/TaskDetails";
 function App() {
   return (
     <Router>
-      <Header />
-      <main>
-        <DataProvider>
+      <DataProvider>
+        <Header />
+        <main>
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/new-task" element={<AddNewTask />} />
             <Route path="/task/details/:id" element={<TaskDetails />} />
           </Routes>
-        </DataProvider>
-      </main>
+        </main>
+      </DataProvider>
     </Router>
   );
 }

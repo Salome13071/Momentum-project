@@ -36,3 +36,6 @@
   right: 40px;
   padding: 8px 0px;
 }
+.selectedButton:hover {
+  background: #b588f4;
+}

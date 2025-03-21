@@ -96,7 +96,6 @@ export default function TaskDetails() {
                     <div className={styles.emplInfo_titles}>
                       <p> {taskDetails.department.name}</p>
                       <h4>
-                        {" "}
                         {`${taskDetails.employee.name} ${taskDetails.employee.surname}`}
                       </h4>
                     </div>
