@@ -1,7 +1,4 @@
-import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState, Fragment } from "react";
@@ -13,10 +10,6 @@ export default function Header() {
   const [newMemberFormIsOpen, setNewMemberFormIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -24,19 +17,6 @@ export default function Header() {
 
     setOpen(false);
   };
-
-  const action = (
-    <Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Fragment>
-  );
 
   return (
     <div className={styles.container}>

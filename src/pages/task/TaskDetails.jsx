@@ -3,6 +3,8 @@ import DataContext from "../../providers/DataProvider";
 import { useContext, useEffect, useRef, useState } from "react";
 import SelectBox from "../../components/comments/selectBox/SelectBox";
 import { useParams } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function getTaskDetails(axiosInstance, id, setTaskDetails, setIsLoading) {
   axiosInstance
@@ -16,13 +18,14 @@ function getTaskDetails(axiosInstance, id, setTaskDetails, setIsLoading) {
     })
     .finally();
 }
-function updateTaskStatus(axiosInstance, taskId, statusId) {
+function updateTaskStatus(axiosInstance, taskId, statusId, setOpen) {
   axiosInstance
     .put(`/tasks/${taskId}`, {
       status_id: statusId,
     })
     .then((response) => {
       console.log(response.data);
+      setOpen(true);
     })
     .catch((error) => {
       console.log(error);
@@ -34,6 +37,15 @@ export default function TaskDetails() {
   const [taskDetails, setTaskDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const effectRun = useRef(false);
   useEffect(() => {
     if (effectRun.current === false) {
@@ -42,7 +54,7 @@ export default function TaskDetails() {
   }, []);
   const handleStatusChange = (key, selectedId) => {
     if (+selectedId !== +taskDetails.status.id) {
-      updateTaskStatus(useAxios, taskDetails.id, selectedId);
+      updateTaskStatus(useAxios, taskDetails.id, selectedId, setOpen);
     }
   };
   return (
@@ -140,6 +152,16 @@ export default function TaskDetails() {
       ) : (
         "Loading..."
       )}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          სტატუსი წარმატებით განახლდა!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
