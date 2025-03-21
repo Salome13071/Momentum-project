@@ -25,7 +25,6 @@ function getTasks(axiosInstance, setTasksData, setIsLoading) {
   axiosInstance
     .get(`/tasks`)
     .then((response) => {
-      console.log("getTasks ", response.data);
       setTasksData(response.data);
       setIsLoading(false);
     })
@@ -41,6 +40,12 @@ export default function Task() {
   const [isLoading, setIsLoading] = useState(true);
   const [localTasksData, setLocalTasksData] = useState([]);
   const effectRun = useRef(false);
+  const statusBgCollors = [
+    { statusId: 1, color: "#f7bc30" },
+    { statusId: 2, color: "#fb5607" },
+    { statusId: 3, color: "#ff006e" },
+    { statusId: 4, color: "#3a86ff" },
+  ];
 
   useEffect(() => {
     if (effectRun.current === false) {
@@ -64,7 +69,14 @@ export default function Task() {
               key={status.id + status.name}
               className={styles.tasksStatusContainer}
             >
-              <div className={styles.taskItemName}>
+              <div
+                className={styles.taskItemName}
+                style={{
+                  background: statusBgCollors.find(
+                    (c) => c.statusId == status.id
+                  ).color,
+                }}
+              >
                 <p>{status.name}</p>
               </div>
               <div>

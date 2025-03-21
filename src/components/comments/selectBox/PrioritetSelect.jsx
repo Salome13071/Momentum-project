@@ -31,9 +31,6 @@ export default function PrioritetSelect({ idKey, data, onChange }) {
           />
         ) : null}
         {selectedValue ? selectedValue?.name : null}
-        {/* <span className={styles.arrowSVG}>
-          <img src="./images/arrow-down.svg" alt="" />
-        </span> */}
       </div>
       {isOpen && (
         <div className={styles.optionsList}>

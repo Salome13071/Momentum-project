@@ -61,12 +61,25 @@ export default function FilterItem({ title, identifier, data }) {
                   checked={checkedItems.includes(checkbox.id)}
                   onChange={() => handleCheckboxChange(checkbox.id)}
                 />
-                {checkbox.name}
+                {identifier == "employee" ? (
+                  <div className={styles.employeeInfo}>
+                    <img
+                      src={checkbox.avatar}
+                      alt={`${checkbox.name} ${checkbox.surname}`}
+                      className={styles.filterEmployeeAvatar}
+                    />
+                    <span>
+                      {checkbox.name} {checkbox.surname}
+                    </span>
+                  </div>
+                ) : (
+                  checkbox.name
+                )}
               </label>
             </div>
           ))}
           <button className={styles.selectedButton} onClick={handleSet}>
-            არჩევა{" "}
+            არჩევა
           </button>
         </div>
       )}

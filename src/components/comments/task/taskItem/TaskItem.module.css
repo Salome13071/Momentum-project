@@ -1,7 +1,6 @@
 .taskItemBox {
   width: 380px;
   height: 217px;
-  border: 1px solid #f7bc30;
   border-radius: 15px;
   margin-top: 30px;
   padding: 24px 24px 0;
@@ -18,9 +17,7 @@
 .taskMedium {
   width: 86px;
   height: 26px;
-  border: 1px solid #f7bc30;
   background: none;
-  color: #f7bc30;
   border-radius: 4px;
   font-size: 12px;
   display: flex;
@@ -29,13 +26,12 @@
   justify-content: center;
 }
 .taskdepartment {
-  width: 86px;
+  width: 110px;
   height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #ff66a8;
   border-radius: 15px;
   font-size: 12px;
 }
@@ -62,6 +58,12 @@
   justify-content: space-between;
   height: 31px;
   margin-top: 28px;
+}
+.taskComentInfoAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .taskComments {
   display: flex;

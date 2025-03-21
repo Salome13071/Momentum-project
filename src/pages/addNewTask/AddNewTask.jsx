@@ -61,12 +61,8 @@ export default function AddNewTask() {
     },
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-  useEffect(() => {
-    console.log("ffffeeerrrr ", formErrors);
-  }, [formErrors]);
+  useEffect(() => {}, [formData]);
+  useEffect(() => {}, [formErrors]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -82,7 +78,6 @@ export default function AddNewTask() {
   };
 
   const handleDepartmentChange = (key, selectedId) => {
-    console.log("department ==>>", selectedId);
     setFormData((prev) => ({
       ...prev,
       department: parseInt(selectedId),
@@ -112,8 +107,6 @@ export default function AddNewTask() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("isFormValid", isFormValid());
-    console.log("submit");
     if (!isFormValid()) return false;
     useAxios
       .post("/tasks", {
@@ -125,7 +118,6 @@ export default function AddNewTask() {
         due_date: formData.due_date,
       })
       .then((response) => {
-        console.log(response);
         navigate("/dashboard");
       })
       .catch((error) => {
@@ -141,7 +133,6 @@ export default function AddNewTask() {
   };
 
   const formValidation = (key, value) => {
-    console.log("switch -> key -> ", key);
     let isValid = false;
     switch (key) {
       case "name":
@@ -245,12 +236,13 @@ export default function AddNewTask() {
           </label>
 
           <label className={styles.newTaskDep}>
-            <h3 className={styles.headerLableH3}> დეპარტამენტი*</h3>
+            <h3 className={styles.headerLableH3Dep}> დეპარტამენტი*</h3>
             <SelectBox
               idKey={"department"}
               defVal={null}
               data={departmentData}
               onChange={handleDepartmentChange}
+              className={styles.emplDep}
             />
           </label>
           <label>

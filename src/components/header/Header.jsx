@@ -1,12 +1,42 @@
 import { Button } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import AddNewMember from "../newMember/AddNewMember";
+import Alert from "@mui/material/Alert";
 
 export default function Header() {
   const navigate = useNavigate();
-  const [newMemberFormISOphen, setNewMemberFormISOphen] = useState(false);
+  const [newMemberFormIsOpen, setNewMemberFormIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </Fragment>
+  );
 
   return (
     <div className={styles.container}>
@@ -15,12 +45,19 @@ export default function Header() {
       </div>
       <div className={styles.buttonsContainer}>
         <div className={styles.newMember}>
-          <button onClick={() => setNewMemberFormISOphen(true)}>
+          <button onClick={(val) => setNewMemberFormIsOpen(true)}>
             <p> თანამშრომლის შექმნა</p>
           </button>
         </div>
-        {newMemberFormISOphen && (
-          <AddNewMember onClose={() => setNewMemberFormISOphen(false)} />
+        {newMemberFormIsOpen && (
+          <AddNewMember
+            onClose={(val) => {
+              setNewMemberFormIsOpen(false);
+              if (val == "success") {
+                setOpen(true);
+              }
+            }}
+          />
         )}
         <div className={styles.newTask}>
           <button onClick={() => navigate("/new-task")}>
@@ -29,6 +66,16 @@ export default function Header() {
             </p>
           </button>
         </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            თანამშრომელი წარმატებით დაემატა!
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );

@@ -32,9 +32,11 @@ export default function SelectBox({
       >
         {!defVal ? <option></option> : null}
 
-        {data.map((dep) => (
-          <option key={dep.id + dep.name} value={dep.id}>
-            {dep.name}
+        {data.map((item) => (
+          <option key={item.id + item.name} value={item.id}>
+            {idKey == "employee_id"
+              ? item.name + " " + item.surname
+              : item.name}
           </option>
         ))}
       </select>

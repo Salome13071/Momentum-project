@@ -7,8 +7,11 @@
   margin-top: 80px;
 }
 
-.taskItemName {
+.statusStartBgCollor {
   background: #f7bc30;
+}
+
+.taskItemName {
   width: 381px;
   height: 54px;
   display: flex;

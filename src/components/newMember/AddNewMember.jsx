@@ -21,12 +21,8 @@ export default function AddNewMember({ onClose }) {
     avatar: { desc: "", isValid: false },
   });
 
-  useEffect(() => {
-    console.log("formErrors", formErrors);
-  }, [formErrors]);
-  useEffect(() => {
-    console.log("formData", formData);
-  }, [formData]);
+  useEffect(() => {}, [formErrors]);
+  useEffect(() => {}, [formData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -95,7 +91,7 @@ export default function AddNewMember({ onClose }) {
       .post("/employees", requestFormData)
       .then((response) => {
         console.log("Form submitted:", response);
-        onClose();
+        onClose("success");
       })
       .catch((error) => {
         console.log(error);
@@ -128,7 +124,6 @@ export default function AddNewMember({ onClose }) {
         });
         break;
       case "avatar":
-        console.log("avatar-value", value);
         isValid = value.isValid;
         updateFormErrorState(key, {
           desc: isValid ? "" : value.desc,
@@ -164,13 +159,7 @@ export default function AddNewMember({ onClose }) {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  <p
-                    className={
-                      formErrors.name.isValid
-                        ? styles.greenText
-                        : styles.redText
-                    }
-                  >
+                  <p className={styles.formSurnamesError}>
                     {formErrors.name.desc}
                   </p>
                   <p className={styles.newTaskParagraph}>
@@ -188,13 +177,7 @@ export default function AddNewMember({ onClose }) {
                     value={formData.surname}
                     onChange={handleChange}
                   />
-                  <p
-                    className={
-                      formErrors.surname.isValid
-                        ? styles.greenText
-                        : styles.redText
-                    }
-                  >
+                  <p className={styles.formSurnamesError}>
                     {formErrors.surname.desc}
                   </p>
                   <p className={styles.newTaskParagraph}>
@@ -220,7 +203,7 @@ export default function AddNewMember({ onClose }) {
                       className={styles.deleteAvatar}
                       onClick={removeAvatar}
                     >
-                      🗑️
+                      <img src="./images/trash-2.svg" alt="" />
                     </button>
                   </>
                 ) : (
@@ -230,6 +213,9 @@ export default function AddNewMember({ onClose }) {
                     className={styles.avatarImgInput}
                   />
                 )}
+              </div>
+              <div className={styles.avatarErroreText}>
+                {formErrors.avatar.isValid ? "" : formErrors.avatar.desc}
               </div>
             </div>
 
@@ -241,6 +227,7 @@ export default function AddNewMember({ onClose }) {
                 idKey={"department_id"}
                 data={departmentData}
                 onChange={handleSelectBox}
+                className={styles.departmentInput_input}
               />
               <p
                 className={

@@ -39,3 +39,14 @@
 .selectedButton:hover {
   background: #b588f4;
 }
+.filterEmployeeAvatar {
+  object-fit: cover;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+.employeeInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

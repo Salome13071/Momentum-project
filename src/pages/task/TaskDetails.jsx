@@ -8,7 +8,6 @@ function getTaskDetails(axiosInstance, id, setTaskDetails, setIsLoading) {
   axiosInstance
     .get(`/tasks/${id}`)
     .then((response) => {
-      console.log("taskDetails", response.data);
       setTaskDetails(response.data);
       setIsLoading(false);
     })
