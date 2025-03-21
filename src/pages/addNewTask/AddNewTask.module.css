@@ -65,12 +65,11 @@
   border: 1px solid #dee2e6;
   border-radius: 5px;
   height: 45px;
-  width: 100%;
+  width: 550px;
 }
 .newTaskDep {
   background: none;
   display: flex;
-  /* gap: 10px; */
 }
 .selectBox {
   background: white;
