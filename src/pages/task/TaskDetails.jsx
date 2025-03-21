@@ -1,103 +1,147 @@
-import { Select } from "@mui/material";
 import styles from "./TaskDetails.module.css";
 import DataContext from "../../providers/DataProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SelectBox from "../../components/comments/selectBox/SelectBox";
+import { useParams } from "react-router-dom";
+
+function getTaskDetails(axiosInstance, id, setTaskDetails, setIsLoading) {
+  axiosInstance
+    .get(`/tasks/${id}`)
+    .then((response) => {
+      console.log("taskDetails", response.data);
+      setTaskDetails(response.data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally();
+}
+function updateTaskStatus(axiosInstance, taskId, statusId) {
+  axiosInstance
+    .put(`/tasks/${taskId}`, {
+      status_id: statusId,
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
 export default function TaskDetails() {
-  const { statusData } = useContext(DataContext);
+  const { statusData, useAxios, useFormatDate } = useContext(DataContext);
+  const [taskDetails, setTaskDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+  const effectRun = useRef(false);
+  useEffect(() => {
+    if (effectRun.current === false) {
+      getTaskDetails(useAxios, id, setTaskDetails, setIsLoading);
+    }
+  }, []);
+  const handleStatusChange = (key, selectedId) => {
+    if (+selectedId !== +taskDetails.status.id) {
+      updateTaskStatus(useAxios, taskDetails.id, selectedId);
+    }
+  };
   return (
-    <div className={styles.taskMainContainer}>
-      <div className={styles.taskDetailsContainer}>
-        <div className={styles.taskDescriptionContainer}>
-          <div className={styles.taskDescription_details}>
-            <div className={styles.taskMedium}>
-              <img src="/images/Medium.svg" alt="" />
-              <p>საშუალო</p>
-            </div>
-            <div className={styles.taskdepartment}>
-              <p>დიზაინი </p>
-            </div>
-          </div>
+    <>
+      {!isLoading ? (
+        <div className={styles.taskMainContainer}>
+          <div className={styles.taskDetailsContainer}>
+            <div className={styles.taskDescriptionContainer}>
+              <div className={styles.taskDescription_details}>
+                <div className={styles.taskMedium}>
+                  <img src={taskDetails.priority.icon} alt="" />
+                  <p>{taskDetails.priority.name}</p>
+                </div>
+                <div className={styles.taskdepartment}>
+                  <p>{taskDetails.department.name}</p>
+                </div>
+              </div>
 
-          <div className={styles.aboutTask}>
-            <h1>Redberry-ს საიტის ლენდინგის დიზაინი </h1>
-            <p>
-              მიზანია რომ შეიქმნას თანამედროვე, სუფთა და ფუნქციონალური დიზაინი,
-              რომელიც უზრუნველყოფს მარტივ ნავიგაციას და მკაფიო ინფორმაციის
-              გადაცემას. დიზაინი უნდა იყოს ადაპტირებადი , გამორჩეული ვიზუალით,
-              მინიმალისტური სტილით და ნათელი ტიპოგრაფიით.
-            </p>
-          </div>
-        </div>
-        <div className={styles.taskDetails}>
-          <h2>დავალების დეტალები </h2>
-          <div className={styles.taskDetails_items}>
-            <div className={styles.status}>
-              <div className={styles.taskDetails_items_title}>
-                <img src="./images/clock.svg" alt="" />
-                <p> სტატუსი</p>
-              </div>
-              <div className={styles.statusSelect}>
-                <SelectBox
-                  defVal={null}
-                  data={statusData}
-                  className={styles.statusSelect}
-                />
+              <div className={styles.aboutTask}>
+                <h1>{taskDetails.name} </h1>
+                <p>{taskDetails.description}</p>
               </div>
             </div>
-            <div className={styles.status}>
-              <div className={styles.taskDetails_items_title}>
-                <img src="./images/person.svg" alt="" />
-                <p> თანამშრომელი</p>
+            <div className={styles.taskDetails}>
+              <h2>დავალების დეტალები </h2>
+              <div className={styles.taskDetails_items}>
+                <div className={styles.status}>
+                  <div className={styles.taskDetails_items_title}>
+                    <img src="./images/clock.svg" alt="" />
+                    <p> სტატუსი</p>
+                  </div>
+                  <div className={styles.statusSelect}>
+                    <SelectBox
+                      defVal={taskDetails.status.id}
+                      data={statusData}
+                      onChange={handleStatusChange}
+                      className={styles.statusSelect}
+                    />
+                  </div>
+                </div>
+                <div className={styles.status}>
+                  <div className={styles.taskDetails_items_title}>
+                    <img src="./images/person.svg" alt="" />
+                    <p> თანამშრომელი</p>
+                  </div>
+                  <div className={styles.emplInfo}>
+                    <div>
+                      <img src={taskDetails.employee.avatar} alt="" />
+                    </div>
+                    <div className={styles.emplInfo_titles}>
+                      <p> {taskDetails.department.name}</p>
+                      <h4>
+                        {" "}
+                        {`${taskDetails.employee.name} ${taskDetails.employee.surname}`}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.status}>
+                  <div className={styles.taskDetails_items_title}>
+                    <img src="./images/calendar.svg" alt="" />
+                    <p> დავალების ვადა</p>
+                  </div>
+                  <div>
+                    <p>{useFormatDate(taskDetails.due_date)}</p>
+                  </div>
+                </div>
               </div>
-              <div className={styles.emplInfo}>
-                <div>
+            </div>
+          </div>
+          <div className={styles.comentsContainer}>
+            <form className={styles.comentInput}>
+              <input type="text" placeholder="დაწერე კომენტარი" />
+              <button type="submit">დააკომენტარე</button>
+            </form>
+            <div className={styles.comentsBox}>
+              <div className={styles.comments}>
+                <h3>კომენტარები</h3>
+                <label>2</label>
+              </div>
+
+              <div className={styles.coments_info}>
+                <div className={styles.coments_name}>
                   <img src="./images/avatar.png" alt="" />
+                  <h4>ემილია მორგანი</h4>
                 </div>
-                <div className={styles.emplInfo_titles}>
-                  <p> დიზაინის დეპარტამენტი</p>
-                  <h4> ელაია ბაგრატიონი</h4>
-                </div>
-              </div>
-            </div>
-            <div className={styles.status}>
-              <div className={styles.taskDetails_items_title}>
-                <img src="./images/calendar.svg" alt="" />
-                <p> დავალების ვადა</p>
-              </div>
-              <div>
-                {" "}
-                <p>ორშ - 02/2/2025</p>
+
+                <p>
+                  დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება,
+                  რომ ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.comentsContainer}>
-        <form className={styles.comentInput}>
-          <input type="text" placeholder="დაწერე კომენტარი" />
-          <button type="submit">დააკომენტარე</button>
-        </form>
-        <div className={styles.comentsBox}>
-          <div className={styles.comments}>
-            <h3>კომენტარები</h3>
-            <label>2</label>{" "}
-          </div>
-
-          <div className={styles.coments_info}>
-            <div className={styles.coments_name}>
-              <img src="./images/avatar.png" alt="" />
-              <h4>ემილია მორგანი</h4>
-            </div>
-
-            <p>
-              დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება, რომ
-              ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+      ) : (
+        "Loading..."
+      )}
+    </>
   );
 }

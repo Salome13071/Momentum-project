@@ -8,9 +8,21 @@ export default function Filter() {
     useContext(DataContext);
   return (
     <div className={styles.filterBoxes}>
-      <FilterItem title="დეპარტამენტი" data={departmentData} />
-      <FilterItem title="პრიორიტეტი" data={prioritetData} />
-      <FilterItem title="თანამშრომელი" data={employeesData} />
+      <FilterItem
+        title="დეპარტამენტი"
+        identifier="department"
+        data={departmentData}
+      />
+      <FilterItem
+        title="პრიორიტეტი"
+        identifier="priority"
+        data={prioritetData}
+      />
+      <FilterItem
+        title="თანამშრომელი"
+        identifier="employee"
+        data={employeesData}
+      />
     </div>
   );
 }

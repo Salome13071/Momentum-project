@@ -27,10 +27,46 @@ export default function AddNewTask() {
   const [isDepartmentSelected, setIsDepartmentSelected] = useState(false);
   const [isTouched, setIsTouched] = useState(false);
   const [localEmployeesData, setLocalEmployeesData] = useState([]);
+  const [formErrors, setFormErrors] = useState({
+    name: {
+      desc: "",
+      isValid: false,
+      lenght: 0,
+    },
+    description: {
+      desc: "",
+      isValid: false,
+      lenght: 0,
+      wordCount: 0,
+    },
+    department: {
+      desc: "",
+      isValid: false,
+    },
+    employee_id: {
+      desc: "",
+      isValid: false,
+    },
+    priority_id: {
+      desc: "",
+      isValid: false,
+    },
+    status_id: {
+      desc: "",
+      isValid: false,
+    },
+    due_date: {
+      desc: "",
+      isValid: false,
+    },
+  });
 
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+  useEffect(() => {
+    console.log("ffffeeerrrr ", formErrors);
+  }, [formErrors]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,32 +74,15 @@ export default function AddNewTask() {
       ...prev,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = () => {
-    useAxios
-      .post("/tasks", {
-        name: formData.name,
-        description: formData.description,
-        employee_id: formData.employee_id,
-        priority_id: formData.priority_id,
-        status_id: formData.status_id,
-        due_date: formData.due_date,
-      })
-      .then((response) => {
-        console.log(response);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    formValidation(name, value);
   };
 
   const handleBlur = () => {
     setIsTouched(true);
   };
 
-  const handleDepartmentChange = (selectedId) => {
+  const handleDepartmentChange = (key, selectedId) => {
+    console.log("department ==>>", selectedId);
     setFormData((prev) => ({
       ...prev,
       department: parseInt(selectedId),
@@ -78,58 +97,161 @@ export default function AddNewTask() {
       setLocalEmployeesData([]);
       setIsDepartmentSelected(false);
     }
+    formValidation(key, parseInt(selectedId));
   };
 
-  const handleEmployeeChange = (selectedId) => {
-    setFormData((prev) => ({
+  const handleSelectBox = (key, selectedId) => {
+    if (Object.hasOwn(formData, key)) {
+      setFormData((prev) => ({
+        ...prev,
+        [key]: parseInt(selectedId),
+      }));
+    }
+    formValidation(key, selectedId);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("isFormValid", isFormValid());
+    console.log("submit");
+    if (!isFormValid()) return false;
+    useAxios
+      .post("/tasks", {
+        name: formData.name,
+        description: formData.description,
+        employee_id: formData.employee_id,
+        priority_id: formData.priority_id,
+        status_id: formData.status_id,
+        due_date: formData.due_date,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const updateFormErrorState = (key, data) => {
+    setFormErrors((prev) => ({
       ...prev,
-      employee_id: parseInt(selectedId),
+      [key]: data,
     }));
   };
 
-  const isValid = formData.name.length >= 2;
-  const wordCount = formData.description
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean).length;
-  const isValidWord = wordCount >= 4;
+  const formValidation = (key, value) => {
+    console.log("switch -> key -> ", key);
+    let isValid = false;
+    switch (key) {
+      case "name":
+        isValid = value.length >= 2 && value.length <= 255;
+        updateFormErrorState(key, {
+          desc: isValid
+            ? ""
+            : "სათაური უნდა შეიცავდეს მინიმუმ 3 და მაქსიმუმ 255 სიმბოლოს",
+          length: value.length,
+          isValid,
+        });
+        break;
+      case "description":
+        const descriptionWordCount = value
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean).length;
+        isValid = descriptionWordCount >= 4 && value.length <= 255;
+        updateFormErrorState(key, {
+          desc: isValid
+            ? ""
+            : "აღწერა უნდა შედგებოდეს მინიმუმ 4 სიტყვისგან და არ უნდა იყოს 255 სიმბოლოზე მეტი",
+          lenght: value.length,
+          wordCount: descriptionWordCount,
+          isValid,
+        });
+        break;
+      case "department":
+        isValid = Number.isInteger(Number(value)) && value > 0;
+        updateFormErrorState(key, {
+          desc: isValid ? "" : "დეპარტამენტის არჩევა სავალდებულოა",
+          isValid,
+        });
+        break;
+      case "employee_id":
+        isValid = Number.isInteger(Number(value)) && value > 0;
+        updateFormErrorState(key, {
+          desc: isValid ? "" : "თანამშრომლის არჩევა სავალდებულოა",
+          isValid,
+        });
+        break;
+      case "priority_id":
+        isValid = Number.isInteger(Number(value)) && value > 0;
+        updateFormErrorState(key, {
+          desc: isValid ? "" : "პრიორიტეტის არჩევა სავალდებულოა",
+          isValid,
+        });
+        break;
+      case "status_id":
+        isValid = Number.isInteger(Number(value)) && value > 0;
+        updateFormErrorState(key, {
+          desc: isValid ? "" : "სტატუსის არჩევა სავალდებულოა",
+          isValid,
+        });
+        break;
+      case "due_date":
+        const regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+        isValid = regex.test(value);
+        updateFormErrorState(key, {
+          desc: isValid ? "" : "თარიღი არ არის არჩეული",
+          isValid,
+        });
+        break;
+      default:
+        null;
+    }
+  };
 
+  const isFormValid = () => {
+    if (Object.values(formErrors).find((i) => !i.isValid)) return false;
+    return true;
+  };
+  const maxL = 255;
   return (
     <div>
       <h1 className={styles.addNewTaskHeader}>შექმენი ახალი დავალება</h1>
-      <form className={styles.formMainBox}>
+      <form className={styles.formMainBox} onSubmit={handleSubmit}>
         <div className={styles.taskLabels}>
           <label className={styles.headerLable}>
             <h3 className={styles.headerLableH3}>სათაური*</h3>
             <input
               type="text"
               name="name"
-              required
-              minLength="2"
-              maxLength="255"
+              maxLength={255}
               value={formData.name}
               onBlur={handleBlur}
               onChange={handleChange}
             />
-            <p className={isValid ? styles.greenText : styles.redText}>
+            <p
+              className={
+                formErrors.name.isValid ? styles.greenText : styles.redText
+              }
+            >
               მინიმუმ 2 სიმბოლო
             </p>
-            <p className={styles.newTaskParagraph}> მაქსიმუმ 255 სიმბოლო</p>
+            <p className={styles.newTaskParagraph}>
+              {" "}
+              მაქსიმუმ{" "}
+              {255 - (formErrors.name.length ? formErrors.name.length : 0)}{" "}
+              სიმბოლო
+            </p>
           </label>
 
           <label className={styles.newTaskDep}>
             <h3 className={styles.headerLableH3}> დეპარტამენტი*</h3>
             <SelectBox
+              idKey={"department"}
               defVal={null}
               data={departmentData}
               onChange={handleDepartmentChange}
-
-              // onChange={(selectedId) =>
-              //   setFormData((prev) => ({
-              //     ...prev,
-              //     department: parseInt(selectedId),
-              //   }))
-              // }
             />
           </label>
           <label>
@@ -144,10 +266,12 @@ export default function AddNewTask() {
             ></textarea>
             <p
               className={`${styles.newTaskParagraph} ${
-                isValidWord ? styles.greenText : styles.redText
+                formErrors.description.isValid
+                  ? styles.greenText
+                  : styles.redText
               }`}
             >
-              მინიმუმ 4 სიტყვა ({wordCount} / 4)
+              მინიმუმ 4 სიტყვა ({formErrors.description.wordCount} / 4)
             </p>
             <p className={styles.newTaskParagraph}> მაქსიმუმ 255 სიმბოლო</p>
           </label>
@@ -156,16 +280,11 @@ export default function AddNewTask() {
               პასუხისმგებელი თანამშრომელი*
             </h3>
             <SelectBox
+              idKey={"employee_id"}
               defVal={null}
               data={localEmployeesData}
               className={styles.employBox}
-              onChange={handleEmployeeChange}
-              // onChange={(selectedId) =>
-              //   setFormData((prev) => ({
-              //     ...prev,
-              //     employee_id: parseInt(selectedId),
-              //   }))
-              // }
+              onChange={handleSelectBox}
               isDisabled={!isDepartmentSelected}
             />
           </label>
@@ -175,26 +294,23 @@ export default function AddNewTask() {
             <label className={styles.newTaskboxPrioritet}>
               <h3 className={styles.headerLableH3}>პრიორიტეტი* </h3>
               <PrioritetSelect
+                idKey={"priority_id"}
                 data={prioritetData}
-                onChange={(selectedId) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    priority_id: parseInt(selectedId),
-                  }))
-                }
+                onChange={handleSelectBox}
               />
             </label>
             <label className={styles.newTaskboxStatus}>
+              <p>
+                {!formErrors.status_id.isValid
+                  ? formErrors.status_id.desc
+                  : null}
+              </p>
               <h3 className={styles.headerLableH3}>სტატუსი* </h3>
               <SelectBox
+                idKey="status_id"
                 defVal={1}
                 data={statusData}
-                onChange={(selectedId) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    status_id: parseInt(selectedId),
-                  }))
-                }
+                onChange={handleSelectBox}
               />
             </label>
           </div>
@@ -211,7 +327,7 @@ export default function AddNewTask() {
           </div>
         </div>
         <div className={styles.AddNewTaskSubmiT}>
-          <button className="" type="submit">
+          <button className="" type="submit" disabled={!isFormValid()}>
             დავალების შექმნა
           </button>
         </div>

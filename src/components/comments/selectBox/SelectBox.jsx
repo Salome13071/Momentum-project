@@ -2,6 +2,7 @@ import styles from "./SelectBox.module.css";
 import { useEffect } from "react";
 
 export default function SelectBox({
+  idKey,
   data,
   className,
   onChange,
@@ -9,14 +10,14 @@ export default function SelectBox({
   isDisabled,
 }) {
   const handleChange = (event) => {
-    onChange(event.target.value);
+    onChange(idKey, event.target.value);
   };
 
   useEffect(() => {
     if (defVal) {
       const defaultItem = data.find((item) => item.id === defVal);
       if (defaultItem) {
-        onChange(defaultItem.id);
+        onChange(idKey, defaultItem.id);
       }
     }
   }, [data]);
@@ -27,15 +28,12 @@ export default function SelectBox({
         className={`${className}`}
         onChange={handleChange}
         disabled={isDisabled ? "disabled" : null}
+        defaultValue={defVal}
       >
         {!defVal ? <option></option> : null}
 
         {data.map((dep) => (
-          <option
-            key={dep.id + dep.name}
-            value={dep.id}
-            selected={defVal && dep.id === defVal ? "selected" : ""}
-          >
+          <option key={dep.id + dep.name} value={dep.id}>
             {dep.name}
           </option>
         ))}

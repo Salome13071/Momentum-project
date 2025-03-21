@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SelectBox.module.css";
 
-export default function PrioritetSelect({ data, onChange }) {
+export default function PrioritetSelect({ idKey, data, onChange }) {
   const [selectedValue, setSelectedValue] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -10,14 +10,14 @@ export default function PrioritetSelect({ data, onChange }) {
     const defaultItem = data.find((item) => item.id === 2);
     setSelectedValue(defaultItem);
     if (defaultItem) {
-      onChange(defaultItem.id);
+      onChange(idKey, defaultItem.id);
     }
   }, [data]);
 
   const handleSelect = (item) => {
     setSelectedValue(item);
     setIsOpen(false);
-    onChange(item.id);
+    onChange(idKey, item.id);
   };
 
   return (

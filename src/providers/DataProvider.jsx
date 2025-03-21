@@ -17,6 +17,13 @@ const axiosInstance = axios.create({
     Authorization: `Bearer ${token}`,
   },
 });
+const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${day}-${month}-${year}`;
+};
 
 export const DataProvider = ({ children }) => {
   const [filterData, setFilterData] = useState({ key: null, value: null });
@@ -26,6 +33,7 @@ export const DataProvider = ({ children }) => {
   const [statusData, setStatusData] = useState([]);
   const [employeesData, setEmployeesData] = useState([]);
   const useAxios = useMemo(() => axiosInstance);
+  const useFormatDate = useMemo(() => formatDate);
   const effectRun = useRef(false);
 
   useEffect(() => {
@@ -41,11 +49,13 @@ export const DataProvider = ({ children }) => {
     <DataContext.Provider
       value={{
         useAxios,
+        useFormatDate,
         filterData,
         departmentData,
         prioritetData,
         statusData,
         employeesData,
+        fitlterOutputData,
         setFilterData,
         setFilterOutputData,
         setEmployeesData,

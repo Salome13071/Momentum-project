@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import styles from "./FilterItem.module.css";
 import DataContext from "../../../providers/DataProvider";
 
-export default function FilterItem({ title, data }) {
+export default function FilterItem({ title, identifier, data }) {
   const [checkedItems, setCheckedItems] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { filterData, setFilterData, setFilterOutputData } =
@@ -34,7 +34,7 @@ export default function FilterItem({ title, data }) {
     setFilterOutputData((prevState) => {
       return {
         ...prevState,
-        [title]: checkedItems,
+        [identifier]: checkedItems,
       };
     });
   };

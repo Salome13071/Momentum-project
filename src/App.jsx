@@ -21,7 +21,7 @@ function App() {
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/new-task" element={<AddNewTask />} />
-            <Route path="/taskDetails" element={<TaskDetails />} />
+            <Route path="/task/details/:id" element={<TaskDetails />} />
           </Routes>
         </DataProvider>
       </main>

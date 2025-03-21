@@ -5,7 +5,6 @@
   border-radius: 15px;
   margin-top: 30px;
   padding: 24px 24px 0;
-  cursor: pointer;
 }
 .TaskItemInfo {
   display: flex;
@@ -46,6 +45,10 @@
 .aboutTask {
   padding: 0 10px;
   margin-top: 29px;
+  cursor: pointer;
+}
+.aboutTask:hover {
+  color: rgb(164, 164, 203);
 }
 .aboutTask h3 {
   font-size: 15px;
